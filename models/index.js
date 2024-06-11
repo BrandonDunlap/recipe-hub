@@ -12,12 +12,14 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   },
 });
 
-const User = require('./User')(sequelize);
-const Recipe = require('./Recipe')(sequelize);
+//Import models
+const User = require('./User')(sequelize, Sequelize);
+const Recipe = require('./Recipe')(sequelize, Sequelize);
 
 User.hasMany(Recipe);
 Recipe.belongsTo(User);
 
+//Export models and sequelize
 module.exports = {
   sequelize,
   User,
