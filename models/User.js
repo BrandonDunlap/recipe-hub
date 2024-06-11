@@ -1,28 +1,22 @@
-const pool = require('./index');
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('.');
 
-class User {
-  static async createUser(username, password) {
-    try {
-      const { rows } = await pool.query(
-        'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *',
-        [username, password]
-      );
-      return rows[0];
-    } catch (error) {
-      console.error('Error creating user:', error);
-      throw error;
-    }
-  }
-
-  static async getUserbyUsername(username) {
-    try {
-      const { rows } = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
-      return rows[0];
-    } catch (error) {
-      console.error('Error fetching user by username:', error);
-      throw error;
-    }
-  }
-}
-
-module.exports = User;
+module.exports = (sequelize) => {
+  const User = sequelize.define('User', {
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  });
+  return User;
+};
