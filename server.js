@@ -3,7 +3,8 @@ require('dotenv').config();
 
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const { sequelize } = require('./models');
+const PORT = process.env.PORT || 5432;
 
 // Middleware
 app.use(express.json());
@@ -13,7 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 const routes = require('./routes');
 app.use('/api', routes);
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// Sync the database and start the server
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
 });
