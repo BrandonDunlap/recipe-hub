@@ -2,17 +2,29 @@
 require('dotenv').config();
 
 const express = require('express');
+const exphbs = require('express-handlebars');
+const path = require('path');
 const app = express();
 const { sequelize } = require('./models');
-const PORT = process.env.PORT || 5432;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Set Handlebars as the view engine
+const hbs = exphbs.create({
+  partialsDir: path.join(__dirname, 'views/partials')
+});
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
 // Routes
 const routes = require('./routes');
-app.use('/api', routes);
+app.use('/', routes); // Ensure root route is handled
 
 // Sync the database and start the server
 sequelize.sync({ force: false }).then(() => {
