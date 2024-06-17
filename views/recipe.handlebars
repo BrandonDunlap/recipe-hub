@@ -1,8 +1,9 @@
+{{> header}}
 <div class="container">
-  <h1>Recipes</h1>
-  <ul>
-    {{#each recipes}}
-    <li><a href="/recipes/{{this.id}}">{{this.title}}</a></li>
-    {{/each}}
-  </ul>
+  <h1>{{recipe.title}}</h1>
+  <p>{{recipe.description}}</p>
+  <p><strong>Ingredients:</strong> {{recipe.ingredients}}</p>
+  <p><strong>Instructions:</strong> {{recipe.instructions}}</p>
+  <p><strong>Category:</strong> {{recipe.category}}</p>
 </div>
+{{> footer}}

@@ -2,7 +2,16 @@
   <h1>Recipes</h1>
   <ul>
     {{#each recipes}}
-    <li><a href="/recipes/{{this.id}}">{{this.title}}</a></li>
+      <li>
+        <h2>{{this.title}}</h2>
+        <p><strong>Description:</strong> {{this.description}}</p>
+        <p><strong>Ingredients:</strong> {{this.ingredients}}</p>
+        <p><strong>Instructions:</strong> {{this.instructions}}</p>
+        <p><strong>Category:</strong> {{this.category}}</p>
+        <a href="/recipes/edit/{{this.id}}">Edit</a> | 
+        <a href="/recipes/delete/{{this.id}}">Delete</a>
+      </li>
     {{/each}}
   </ul>
+  <a href="/add-recipe">Add a new recipe</a>
 </div>

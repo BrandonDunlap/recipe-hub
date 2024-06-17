@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
 const { Recipe, User } = require('../models');
 const authRoutes = require('./api/authRoutes');
 const recipeRoutes = require('./api/recipeRoutes');
@@ -29,6 +28,25 @@ router.get('/recipes', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch recipes' });
   }
+});
+
+// Recipe details route
+router.get('/recipes/:id', async (req, res) => {
+  try {
+    const recipe = await Recipe.findByPk(req.params.id);
+    if (recipe) {
+      res.render('recipe', { recipe });
+    } else {
+      res.status(404).json({ error: 'Recipe not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch recipe details' });
+  }
+});
+
+// Add recipe route
+router.get('/add-recipe', (req, res) => {
+  res.render('add-recipe');
 });
 
 // Use authentication and recipe routes
