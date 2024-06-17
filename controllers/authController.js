@@ -6,10 +6,11 @@ exports.register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newuser = await User.create({ username, email, password: hashedPassword });
-    res.status(201).json(newUser);
+    await User.create({ username, email, password: hashedPassword });
+    res.redirect('/login'); // Redirect to login page after successful registration
   } catch (error) {
-    res.status(500).json({ eror: 'Failed to register user' });
+    console.error('Error registering user:', error);
+    res.status(500).json({ error: 'Failed to register user' });
   }
 };
 
@@ -24,6 +25,7 @@ exports.login = async (req, res) => {
       res.status(401).json({ error: 'Invalid email or password' });
     }
   } catch (error) {
-    res.status(500).json({ eror: 'Failed to login' });
+    console.error('Error logging in user:', error);
+    res.status(500).json({ error: 'Failed to login' });
   }
 };
