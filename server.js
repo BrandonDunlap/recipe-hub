@@ -2,25 +2,26 @@
 require('dotenv').config();
 
 const express = require('express');
-const exphbs = require('express-handlebars');
-const path = require('path');
-const cookieParser = require('cookie-parser');
+const app = express();
 const { sequelize } = require('./models');
 const PORT = process.env.PORT || 3000;
-
-const app = express();
+const exphbs = require('express-handlebars');
+const cookieParser = require('cookie-parser');
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser()); // Add cookie parser middleware
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
+app.use(express.static('public'));  // Serve static files from the public directory
 
-// Set Handlebars as the view engine
-const hbs = exphbs.create({
-  partialsDir: path.join(__dirname, 'views/partials')
-});
-app.engine('handlebars', hbs.engine);
+// Handlebars configuration
+app.engine('handlebars', exphbs.engine({
+  defaultLayout: 'main',
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true,
+  }
+}));
 app.set('view engine', 'handlebars');
 
 // Routes

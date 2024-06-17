@@ -24,8 +24,10 @@ router.get('/login', (req, res) => {
 router.get('/recipes', async (req, res) => {
   try {
     const recipes = await Recipe.findAll();
+    console.log('Fetched recipes:', recipes);
     res.render('recipes', { recipes });
   } catch (error) {
+    console.error('Error fetching recipes:', error);
     res.status(500).json({ error: 'Failed to fetch recipes' });
   }
 });
@@ -40,6 +42,7 @@ router.get('/recipes/:id', async (req, res) => {
       res.status(404).json({ error: 'Recipe not found' });
     }
   } catch (error) {
+    console.error('Error fetching recipe details:', error);
     res.status(500).json({ error: 'Failed to fetch recipe details' });
   }
 });
