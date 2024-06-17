@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { Recipe } = require('../models');
+const jwt = require('jsonwebtoken');
+const { Recipe, User } = require('../models');
 const authRoutes = require('./api/authRoutes');
 const recipeRoutes = require('./api/recipeRoutes');
 
 // Home route
 router.get('/', (req, res) => {
-  res.render('home');
+  const username = req.cookies.username || null;
+  res.render('home', { username });
 });
 
 // Register route

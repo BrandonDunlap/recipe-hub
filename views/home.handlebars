@@ -1,4 +1,7 @@
 <div class="container">
   <h1>Welcome to Recipe Hub</h1>
   <p>Your favorite place to share and discover recipes.</p>
+  {{#if username}}
+    <p class="signed-in">Signed into {{username}}</p>
+  {{/if}}
 </div>

@@ -20,7 +20,9 @@ exports.login = async (req, res) => {
     const user = await User.findOne({ where: { email } });
     if (user && (await bcrypt.compare(password, user.password))) {
       const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      res.json({ token });
+      res.cookie('token', token, { httpOnly: true });
+      res.cookie('username', user.username, { httpOnly: true }); // Store username in cookie
+      res.redirect('/'); // Redirect to homepage after successful login
     } else {
       res.status(401).json({ error: 'Invalid email or password' });
     }

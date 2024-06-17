@@ -4,15 +4,16 @@ require('dotenv').config();
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
-const app = express();
+const cookieParser = require('cookie-parser');
 const { sequelize } = require('./models');
 const PORT = process.env.PORT || 3000;
+
+const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Serve static files from the "public" directory
+app.use(cookieParser()); // Add cookie parser middleware
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set Handlebars as the view engine
@@ -24,7 +25,7 @@ app.set('view engine', 'handlebars');
 
 // Routes
 const routes = require('./routes');
-app.use('/', routes); // Ensure root route is handled
+app.use('/', routes);
 
 // Sync the database and start the server
 sequelize.sync({ force: false }).then(() => {
