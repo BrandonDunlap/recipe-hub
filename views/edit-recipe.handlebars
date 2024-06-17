@@ -1,4 +1,3 @@
-{{> header}}
 <div class="container">
   <h1>Edit Recipe</h1>
   <form action="/recipes/edit/{{recipe.id}}" method="POST">
@@ -8,7 +7,8 @@
     </div>
     <div>
       <label for="description">Description:</label>
-      <textarea id="description" name="description" required>{{recipe.description}}</textarea>
+      <div id="editor-container"></div>  <!-- Quill Editor Container -->
+      <input type="hidden" id="description" name="description" value="{{recipe.description}}">  <!-- Hidden input to store the description -->
     </div>
     <div>
       <label for="ingredients">Ingredients:</label>
@@ -25,4 +25,3 @@
     <button type="submit">Update Recipe</button>
   </form>
 </div>
-{{> footer}}

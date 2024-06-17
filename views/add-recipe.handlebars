@@ -7,7 +7,8 @@
     </div>
     <div>
       <label for="description">Description:</label>
-      <textarea id="description" name="description" required></textarea>
+      <div id="editor-container"></div>  <!-- Quill Editor Container -->
+      <input type="hidden" id="description" name="description">  <!-- Hidden input to store the description -->
     </div>
     <div>
       <label for="ingredients">Ingredients:</label>
