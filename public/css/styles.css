@@ -100,3 +100,12 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+/* Quill Editor Styles */
+#editor-container {
+    height: 200px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
