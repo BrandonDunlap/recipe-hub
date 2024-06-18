@@ -1,11 +1,10 @@
-// Load environment variables from .env file
 require('dotenv').config();
 
 const express = require('express');
 const app = express();
 const { sequelize } = require('./models');
-const PORT = process.env.PORT || 3001;
 const exphbs = require('express-handlebars');
+const path = require('path');
 const cookieParser = require('cookie-parser');
 
 // Middleware
@@ -32,7 +31,7 @@ const routes = require('./routes');
 app.use('/', routes);
 
 // Sync the database and start the server
-const port = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
