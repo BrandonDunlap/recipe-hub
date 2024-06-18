@@ -12,16 +12,19 @@ const cookieParser = require('cookie-parser');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static('public'));  // Serve static files from the public directory
+app.use(express.static('public')); // Serve static files from the public directory
 
 // Handlebars configuration
-app.engine('handlebars', exphbs.engine({
-  defaultLayout: 'main',
-  runtimeOptions: {
-    allowProtoPropertiesByDefault: true,
-    allowProtoMethodsByDefault: true,
-  }
-}));
+app.engine(
+  'handlebars',
+  exphbs.engine({
+    defaultLayout: 'main',
+    runtimeOptions: {
+      allowProtoPropertiesByDefault: true,
+      allowProtoMethodsByDefault: true,
+    },
+  })
+);
 app.set('view engine', 'handlebars');
 
 // Routes
@@ -31,6 +34,6 @@ app.use('/', routes);
 // Sync the database and start the server
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
   });
 });

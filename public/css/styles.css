@@ -19,6 +19,52 @@ header {
     overflow: hidden;
 }
 
+/* Navigation Styles */
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+header nav ul li a {
+    color: #fff; /* Set to white for better contrast */
+    text-decoration: none;
+    font-size: 18px;
+}
+
+header nav ul li a:hover {
+    color: #ddd; /* Light grey for hover state */
+    text-decoration: underline;
+}
+
+/* Centered Content */
+.jumbotron {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.jumbotron h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.jumbotron p {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+
+.jumbotron a {
+    font-size: 1.2em;
+}
+
 /* Button Styles */
 button {
     display: inline-block;
