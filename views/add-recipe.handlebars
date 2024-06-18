@@ -1,27 +1,45 @@
+{{> header }}
 <div class="container">
   <h1>Add a New Recipe</h1>
-  <form action="/recipes" method="POST">
-    <div>
+  <form id="recipe-form" action="/recipes" method="POST">
+    <div class="form-group">
       <label for="title">Title:</label>
-      <input type="text" id="title" name="title" required>
+      <input type="text" class="form-control" id="title" name="title" required>
     </div>
-    <div>
+    <div class="form-group">
       <label for="description">Description:</label>
-      <div id="editor-container"></div>  <!-- Quill Editor Container -->
-      <input type="hidden" id="description" name="description">  <!-- Hidden input to store the description -->
+      <div id="editor-container"></div> <!-- Quill Editor Container -->
+      <input type="hidden" id="description" name="description"> <!-- Hidden input to store the description -->
     </div>
-    <div>
+    <div class="form-group">
       <label for="ingredients">Ingredients:</label>
-      <textarea id="ingredients" name="ingredients" required></textarea>
+      <textarea class="form-control" id="ingredients" name="ingredients" required></textarea>
     </div>
-    <div>
+    <div class="form-group">
       <label for="instructions">Instructions:</label>
-      <textarea id="instructions" name="instructions" required></textarea>
+      <textarea class="form-control" id="instructions" name="instructions" required></textarea>
     </div>
-    <div>
+    <div class="form-group">
       <label for="category">Category:</label>
-      <input type="text" id="category" name="category">
+      <input type="text" class="form-control" id="category" name="category">
     </div>
-    <button type="submit">Add Recipe</button>
+    <button type="submit" class="btn btn-primary btn-block">Add Recipe</button>
   </form>
 </div>
+
+<!-- Include Quill library -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<script>
+  // Initialize Quill editor
+  var quill = new Quill('#editor-container', {
+    theme: 'snow'
+  });
+
+  // Update hidden input with Quill content on form submit
+  document.getElementById('recipe-form').addEventListener('submit', function() {
+    document.getElementById('description').value = quill.root.innerHTML;
+  });
+</script>
+{{> footer }}
