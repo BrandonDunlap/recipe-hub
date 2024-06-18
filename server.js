@@ -32,6 +32,7 @@ const routes = require('./routes');
 app.use('/', routes);
 
 // Sync the database and start the server
+const port = process.env.PORT || 3001;
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
