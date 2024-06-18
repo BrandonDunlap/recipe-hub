@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+console.log('DB_URL:', process.env.DB_URL);
+
 const express = require('express');
 const app = express();
 const { sequelize } = require('./models');
